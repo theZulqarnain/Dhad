@@ -24,24 +24,24 @@ color:#FFF;
 
 @font-face {
     font-family: 'Droid';
-    src: url('fonts/DroidArabicKufi.eot');
-    src: url('fonts/DroidArabicKufi.eot?#iefix') format('embedded-opentype'),
-        url('fonts/DroidArabicKufi.woff2') format('woff2'),
-        url('fonts/DroidArabicKufi.woff') format('woff'),
-        url('fonts/DroidArabicKufi.ttf') format('truetype'),
-        url('/fonts/DroidArabicKufi.svg#DroidArabicKufi') format('svg');
+    src: url('./fonts/DroidArabicKufi.eot');
+    src: url('./fonts/DroidArabicKufi.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/DroidArabicKufi.woff2') format('woff2'),
+        url('./fonts/DroidArabicKufi.woff') format('woff'),
+        url('./fonts/DroidArabicKufi.ttf') format('truetype'),
+        url('./fonts/DroidArabicKufi.svg#DroidArabicKufi') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'DroidNaskhRegular';
-    src: url('fonts/DroidNaskhRegular.eot');
-    src: url('fonts/DroidNaskhRegular.eot') format('embedded-opentype'),
-         url('fonts/DroidNaskhRegular.woff2') format('woff2'),
-         url('fonts/DroidNaskhRegular.woff') format('woff'),
-         url('fonts/DroidNaskhRegular.ttf') format('truetype'),
-         url('fonts/DroidNaskhRegular.svg#DroidNaskhRegular') format('svg');
+    src: url('./fonts/DroidNaskhRegular.eot');
+    src: url('./fonts/DroidNaskhRegular.eot') format('embedded-opentype'),
+         url('./fonts/DroidNaskhRegular.woff2') format('woff2'),
+         url('./fonts/DroidNaskhRegular.woff') format('woff'),
+         url('./fonts/DroidNaskhRegular.ttf') format('truetype'),
+         url('./fonts/DroidNaskhRegular.svg#DroidNaskhRegular') format('svg');
 }
 
 /** * Reset Stylesheet */

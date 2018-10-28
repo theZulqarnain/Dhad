@@ -26,8 +26,10 @@ render(){
     var suggestedWords  = this.getSuggestedWords(); 
     return(
     <Fragment>
-        <span id="error-01" data-dh-id="1"  ref="words" className="dh_sp_error" >
-            {this.props.children}
+        <span id="error-01" data-dh-id="1"  ref="words" onMouseOver="" className="dh_sp_error" >
+		   <label>
+			{this.props.children}
+			</label>
 			<span className="sugg_dropdown" ref="suggDropdown">
 				<span class="sugg_list_words">
 				  {	
