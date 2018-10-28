@@ -1,6 +1,13 @@
 import React, { Component , Fragment  } from 'react';
 
 class Footer extends Component {
+    /* Undo */
+	 undo = ()  => {
+		// cWord.classList.add('dh_sp_error');
+		// clearTimeout(clearStyle);
+		// clearTimeout(removeSugg);
+		// errorLabel.textContent = errorWord;
+	}
 render(){
     return(
 <Fragment>
@@ -16,7 +23,7 @@ render(){
 		تصحيح
 	</p>
 	<p className="f_l">
-		<a  href={null} className="btn_undo" onClick="_undo();">تراجع</a>
+		<a  href="#" className="btn_undo" onClick={this.undo}>تراجع</a>
 	</p>
     </div>
     </Fragment>

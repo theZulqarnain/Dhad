@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 class PunctuationTap extends Component {
 
   // Show details of word...
-	 showWordDetails = (elp) => {
+	 showWordDetails = (elp) =>  {
 		// var ele = elp.parentNode.parentNode.previousElementSibling;
 		// var ele_hide = elp.nextElementSibling;
 		// ele.style.display = "block";
 		// ele_hide.style.display = "block";
-    // elp.style.display = "none";
-   // alert("dfkdik")
-	}
+		// elp.style.display = "none";
+		}
 
 	// Hide details of word...
 	hideWordDetails = (elp) => {
@@ -34,7 +33,7 @@ render(){
       />
     </p>
   </header>
-  <article className="accordian_wrap" ss-container>
+  <article className="accordian_wrap" ss-container="true">
     <p className="paragraph f_r">تصحيح وإضافة علامات الترقيم</p>
     <div className="accordionItem open">
       <h2 className="accordionItemHeading">
@@ -105,13 +104,13 @@ render(){
           </div>
           <div className="acc_more_details_wrap">
             <a
-              onclick="showWordDetails(this);"
+              onClick={this.showWordDetails}
               className="btn_more"
               data-tooltip="تفصيل أكثر"
               data-tooltip-right
             />
             <a
-              onclick="hideWordDetails(this);"
+              onClick={this.hideWordDetails}
               className="btn_more_up"
               data-tooltip="أغلق التفاصيل"
               data-tooltip-right
@@ -189,13 +188,13 @@ render(){
           </div>
           <div className="acc_more_details_wrap">
             <a
-              onclick="showWordDetails(this);"
+              onClick={this.showWordDetails}
               className="btn_more"
               data-tooltip="تفصيل أكثر"
               data-tooltip-right
             />
             <a
-              onclick="hideWordDetails(this);"
+              onClick={this.hideWordDetails}
               className="btn_more_up"
               data-tooltip="أغلق التفاصيل"
               data-tooltip-right
@@ -259,7 +258,7 @@ render(){
         </div>
         <nav className="acc_left_option">
           <a
-            href="javascript:void(0);"
+            href="#"
             className="btn_delete"
             data-tooltip="حذف"
             data-tooltip-right
@@ -273,13 +272,13 @@ render(){
           </div>
           <div className="acc_more_details_wrap">
             <a
-              onclick="showWordDetails(this);"
+              onClick={this.showWordDetails}
               className="btn_more"
               data-tooltip="تفصيل أكثر"
               data-tooltip-right
             />
             <a
-              onclick="hideWordDetails(this);"
+              onClick={this.hideWordDetails}
               className="btn_more_up"
               data-tooltip="أغلق التفاصيل"
               data-tooltip-right

@@ -21,7 +21,7 @@ class MainNav extends Component {
 	 fontChange = () =>  {
     var checkBox3 = this.refs.fontChangeCheck 
     var text3 = document.getElementById("dhad-editor")
-    if (checkBox3.checked == true){
+    if (checkBox3.checked === true){
         text3.style.fontFamily = "DroidNaskhRegular"
     	} else {
        		text3.style.fontFamily = "Droid"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {stopDropDownList} from '../../../Main/HighlightedWrongWords';
+import SimpleScrollbar from "simple-scrollbar";
 class SpellCheckTap extends Component {
 
   
@@ -19,7 +20,7 @@ render(){
       />
     </p>
   </header>
-  <article data-simplebar="init" className="accordian_wrap" ss-container>
+  <article data-simplebar="init" className="accordian_wrap" ss-containe="ture">
     <p className="paragraph f_r">تصحيح الأخطاء الإملائية والأخطاء المطبعية</p>
     <div id="spell-wrapper">
       <div className="accordionItem open">

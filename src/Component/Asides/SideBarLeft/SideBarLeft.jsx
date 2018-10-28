@@ -14,7 +14,7 @@ render(){
       <aside id="sidebar-left-links" className="sidebar_l_links" aria-label>
       <div id="sugg-wrap" className="sugg_wrap">
         <nav className="sidebar_sugg">
-          <ul id className="nav_sugg_top">
+          <ul id="true" className="nav_sugg_top">
             <Statstics />
             <CheckSetting />
             <SpellCheck />
