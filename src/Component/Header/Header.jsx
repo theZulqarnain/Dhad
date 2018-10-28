@@ -6,7 +6,7 @@ class Header extends Component {
 		var assi_btn = document.getElementById("assistant-btn");
 		var editor_wrap = document.getElementById("editor-wrap");
 		var close_assi = document.getElementById("close-assistant-btn");
-		var mis_count = document.getElementById("misspelled-count-wrap");
+		//var mis_count = document.getElementById("misspelled-count-wrap");
 		var rank = document.getElementById("rank-wrap");
 		var sidebar_left_bottom = document.getElementById("sidebar-left-bottom");
 		var sugg_wrap = document.getElementById("sugg-wrap");
@@ -17,7 +17,7 @@ class Header extends Component {
 		editor_wrap.style.width = "40%";
 		editor_wrap.style.marginRight = "0";
 		setTimeout(function(){ close_assi.style.display = "block"; }, 700);
-		mis_count.style.visibility = "hidden";
+		//mis_count.style.visibility = "hidden";
 		setTimeout(function(){ rank.style.display = "block"; }, 500);
 		sidebar_left_bottom.style.display = "none";
 		sugg_wrap.style.width = "50%";
@@ -51,7 +51,7 @@ class Header extends Component {
 		var assi_btn = document.getElementById("assistant-btn");
 		var editor_wrap = document.getElementById("editor-wrap");
 		var close_assi = document.getElementById("close-assistant-btn");
-		var mis_count = document.getElementById("misspelled-count-wrap");
+		//var mis_count = document.getElementById("misspelled-count-wrap");
 		var rank = document.getElementById("rank-wrap");
 		var sidebar_left_bottom = document.getElementById("sidebar-left-bottom");
 		var sugg_wrap = document.getElementById("sugg-wrap");
@@ -62,7 +62,7 @@ class Header extends Component {
 		editor_wrap.style.width = "50%";
 		editor_wrap.style.marginRight = "20%";
 		close_assi.style.display = "none";
-		setTimeout(function(){ mis_count.style.visibility = "visible"; }, 500);
+		//setTimeout(function(){ mis_count.style.visibility = "visible"; }, 500);
 		rank.style.display = "none";
 		sidebar_left_bottom.style.display = "block";
 		sugg_wrap.style.width = "0px";
@@ -99,7 +99,7 @@ render(){
 			</span>
 			<div className="assistan_btn_wrap">
 				<a
-					href="/"
+					href="#"
 					id="assistant-btn"
 					onClick={this.showAssistant}
 					className="btn btn_sm animated_button victoria_four"
@@ -118,23 +118,17 @@ render(){
 				id="rank-wrap"
 				className="rank_wrap f_l"
 				data-tooltip="المحتوى الذي تم كتابته لديه درجة أعلى من 60% من كل المحتوى الذي تم فحصة بأستخدام ضاد حسب أهداف المقارنة التي تم وضعها"
-				data-tooltip-bottom='true'
+				data-tooltip-bottom
 			>
 				<b>60</b>
 				<p>تقييم المحتوى</p>
 			</div>
-			{/* <div id="misspelled-count-wrap" className="misspelled_count_wrap">
-				<span className="f_r word_error_count">7</span>
-				<span className="f_r">خطأ إملائي</span>
-				<span className="f_r pun_error_count">12</span>
-				<span className="f_r">ترقيم</span>
-			</div> */}
 			<div className="close_assistant_wrap">
 				<span
 					id="close-assistant-btn"
 					onClick={this.closeAssistant}
 					className="close_assistant_btn"
-				/>
+					/>
 			</div>
 		</header>
 		
