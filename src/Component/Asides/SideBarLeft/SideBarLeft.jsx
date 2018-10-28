@@ -31,10 +31,10 @@ render(){
       </div>
       <ul id="sidebar-left-bottom" className="nav_l_bottom">
         <li>
-          <a href="javascript:void(0);" title className="lnk_quote" data-tooltip="الانتحال الأدبي" data-tooltip-right />
+          <a href="#"  className="lnk_quote" data-tooltip="الانتحال الأدبي" data-tooltip-right />
         </li>
         <li>
-          <a href="javascript:void(0);" title className="lnk_hired" data-tooltip="أساتذة لغة عربية" data-tooltip-right />
+          <a href="#"  className="lnk_hired" data-tooltip="أساتذة لغة عربية" data-tooltip-right />
         </li>
       </ul>
     </aside>

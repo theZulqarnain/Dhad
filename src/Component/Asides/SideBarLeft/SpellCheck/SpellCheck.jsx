@@ -4,7 +4,7 @@ class SpellCheck extends Component {
 render(){
     return(
         <li>
-        <a href={null} className="tablinks" onClick={ (event) => openTab(event, 'spell-wrap')}>
+        <a href="#" className="tablinks" onClick={ (event) => openTab(event, 'spell-wrap')}>
             <span className="f_l word_error_count">55</span>
             تدقيق إملائي
         </a>

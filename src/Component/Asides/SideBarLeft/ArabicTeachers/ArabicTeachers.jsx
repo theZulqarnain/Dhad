@@ -4,7 +4,7 @@ class ArabicTeachers extends Component {
 render(){
     return(
       <li className="nav_sugg_bottom">
-      <a href={null}  className="lnk_hired">
+      <a href='#'  className="lnk_hired">
         أساتذة لغة عربية
       </a>
     </li>

@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 
 
 class MainNav extends Component {
     constructor(props) {
-        super(props);
-        this.showStatics = this.showStatics.bind(this);  
-        this.fontChange = this.fontChange.bind(this);
+        super(props)
+        this.showStatics = this.showStatics.bind(this)  
+        this.fontChange = this.fontChange.bind(this)
     }
     showStatics = () => {
-        var checkBox = this.refs.staticsCheck ;
-        var text = document.getElementById("textStatics");
+        var checkBox = this.refs.staticsCheck 
+        var text = document.getElementById("textStatics")
         if (checkBox.checked === true){
-            text.style.display = "block";
+            text.style.display = "block"
             } else {
-                   text.style.display = "none";
+                   text.style.display = "none"
             }
     }
   // Change font to Nasikh font in dhad editor
 	 fontChange = () =>  {
     var checkBox3 = this.refs.fontChangeCheck 
-    var text3 = document.getElementById("dhad-editor");
+    var text3 = document.getElementById("dhad-editor")
     if (checkBox3.checked == true){
-        text3.style.fontFamily = "DroidNaskhRegular";
+        text3.style.fontFamily = "DroidNaskhRegular"
     	} else {
-       		text3.style.fontFamily = "Droid";
+       		text3.style.fontFamily = "Droid"
     	}
 	}
     
   fontSize = () => {
-    var checkBox2 = this.refs.fontSizeCheck ;
-    console.log(checkBox2);
-    var text2 = document.getElementById("dhad-editor");
+    var checkBox2 = this.refs.fontSizeCheck 
+    console.log(checkBox2)
+    var text2 = document.getElementById("dhad-editor")
     if (checkBox2.checked === true){
-        text2.style.fontSize = "20px";
+        text2.style.fontSize = "20px"
       } else {
-            text2.style.fontSize = "16px";
+            text2.style.fontSize = "16px"
       }
   }
 render(){
@@ -45,22 +45,22 @@ render(){
   <ul>
     <li>
       <a
-        href={'javascript:void(0)'}
+        href="#"
         className="lnk_logo"
         data-tooltip="الرجوع الى الرئيسية"
         data-tooltip-left
       />
     </li>
     <li>
-      <a href="javascript:void(0);"  className="lnk_add_file" />
+      <a href="#"  className="lnk_add_file" />
       <ul>
         <li>
-          <a href="javascript:void(0);"  className="lnk_add_file">
+          <a href="#"  className="lnk_add_file">
             مستند جديد
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"  className="lnk_upload">
+          <a href="#"  className="lnk_upload">
             رفع ملف
             <input type="file" name="uploadfile"  />
           </a>
@@ -68,20 +68,20 @@ render(){
       </ul>
     </li>
     <li>
-      <a href="javascript:void(0);"  className="lnk_download" />
+      <a href="#"  className="lnk_download" />
       <ul>
         <li>
-          <a href="javascript:void(0);"  className="lnk_download">
+          <a href="#"  className="lnk_download">
             تنزيل الملف
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"  className="lnk_printer">
+          <a href="#"  className="lnk_printer">
             طباعة الملف
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"  className="lnk_copy">
+          <a href="#"  className="lnk_copy">
             نسخ النص
           </a>
         </li>
@@ -90,7 +90,7 @@ render(){
   </ul>
   <ul className="nav_bottom">
     <li>
-      <a href="javascript:void(0);"  className="lnk_controls" />
+      <a href="#"  className="lnk_controls" />
       <ul className="sub_menu_option">
         <li className="hr">
           <p>خيارات المحرر</p>
@@ -152,25 +152,25 @@ render(){
       </ul>
     </li>
     <li>
-      <a href="javascript:void(0);"  className="lnk_support" />
+      <a href="#"  className="lnk_support" />
       <ul>
         <li>
-          <a href="javascript:void(0);" >
+          <a href="#" >
             الدعم الفني
           </a>
         </li>
         <li className="hr">
-          <a href="javascript:void(0);" >
+          <a href="#" >
             رأيك في ضاد
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);" >
+          <a href="#" >
             سياسات الخصوصية
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);" >
+          <a href="#" >
             شروط الأستخدام
           </a>
         </li>
@@ -180,11 +180,11 @@ render(){
 </aside>
 
 
-    );
+    )
  }
 }   
 
-export default MainNav ; 
+export default MainNav  
 
 
 
