@@ -4,15 +4,15 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import editorReducer from './store/reducers/editor';
-import authReducer from './store/reducers/auth';
+import draftReducer from './store/reducers/draftReducer';
+import checkReducer from './store/reducers/checkReducer';
 import './index.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
-    edi: editorReducer,
-    au: authReducer
+    draftReducer: draftReducer,
+    checkReducer: checkReducer 
 });
 
 const logger = store => {

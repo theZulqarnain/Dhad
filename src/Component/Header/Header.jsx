@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+/*
+
+In this component we need to set props dyinamicaly to check if the changes in the 
+edtiort has been saved and to set anthor props to show a spinner while checking 
+the content and stop sipinner when we got a respones from the server 
+*/
+
+
 class Header extends Component {
   // Appear left aside with Assistant wrap
 	 showAssistant = () =>  {

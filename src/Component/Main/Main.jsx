@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/index";
+
 import Footer from "../Footer/Footer";
 import {
   Editor,
-  EditorState,
   CompositeDecorator,
   ContentState
 } from "draft-js";
+
 import HighlightedWrongWords from "./HighlightedWrongWords";
 import SimpleScrollbar from "simple-scrollbar";
+import * as actionCreators from "../../store/actions/index";
+import * as actionTypes from '../../store/actions/actionTypes';
 var h2p = require("html2plaintext");
 
 class Main extends Component {
@@ -22,7 +24,7 @@ class Main extends Component {
       }
     ]);
     this.state = {
-      editorState: EditorState.createEmpty(compositeDecorator),
+      
       subjectTitle: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,13 +32,11 @@ class Main extends Component {
     this.highlightWorngWords = this.highlightWorngWords.bind(this);
   }
 
-  handleChange = editorState => {
-    let TextValue = editorState.getCurrentContent().getPlainText();
-    this.setState({
-      editorState
-    });
-    var text = h2p(editorState.getCurrentContent().getPlainText());
-    console.log("satet", text);
+  handleChange = (editorState) => {  
+    this.props.onSaveEditorState(editorState);  
+    var text = h2p(this.props.editorState.getCurrentContent().getPlainText());
+    console.log("abeer", text);
+
     this.props.onChangeText(text);
     this.props.onSpellCheck(text);
   };
@@ -119,9 +119,10 @@ class Main extends Component {
             />
             <div id="dhad-editor" className="dhad_editor">
               <Editor
-                editorState={this.state.editorState}
+                editorState={this.props.editorState}
                 onChange={this.handleChange}
                 textDirectionality="RTL"
+                placeholder="type here "
               />
             </div>
           </section>
@@ -140,19 +141,26 @@ class Main extends Component {
 
 const mapStateToProps = state => {
   return {
-    text: state.edi.text,
-    errorWordslist: state.edi.errorWordslist,
-    correctionsList: state.edi.correctionsList
+    editorState: state.draftReducer.editorState ,
+    errorWordslist: state.checkReducer.errorWordslist,
+    correctionsList: state.checkReducer.correctionsList
+    
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onStart: () => dispatch(actionCreators.start()),
-    onChangeText: value => dispatch(actionCreators.TextChange(value)),
-    onSpellCheck: word => dispatch(actionCreators.ErorrWordsList(word))
-  };
-};
+  onSaveEditorState: (editorState) => {
+    dispatch({
+      type: actionTypes.UPDATE_EDITOR_STATE ,
+      payload: editorState,
+    })
+  } ,
+  onChangeText: value => dispatch(actionCreators.TextChange(value)),
+  onSpellCheck: word => dispatch(actionCreators.ErorrWordsList(word))
+
+ }
+} 
 
 export default connect(
   mapStateToProps,
