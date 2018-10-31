@@ -4,7 +4,8 @@ import Footer from "../Footer/Footer";
 import {
   Editor,
   CompositeDecorator,
-  EditorState 
+  EditorState  , 
+  ContentState
 } from "draft-js";
 
 import HighlightedWrongWords from "./HighlightedWrongWords";
@@ -24,7 +25,8 @@ class Main extends Component {
       }
     ]);  
     this.state = {
-      editorState: EditorState.createEmpty(compositeDecorator),
+      //editorState: EditorState.createEmpty(compositeDecorator),
+      editorState: EditorState.createWithContent( ContentState.createFromText('اكتي موضوع عن ضاد النهووض باللغة العربية وإثراء المحتوى العربي') , compositeDecorator) ,
       subjectTitle: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -125,7 +127,6 @@ class Main extends Component {
                 editorState={this.state.editorState}
                 onChange={this.handleChange}
                 textDirectionality="RTL"
-                placeholder="type here "
               />
             </div>
           </section>
