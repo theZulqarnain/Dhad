@@ -6,11 +6,8 @@ In this component we need to set props dyinamicaly to check if the changes in th
 edtiort has been saved and to set anthor props to show a spinner while checking 
 the content and stop sipinner when we got a respones from the server 
 */
-
-
-class Header extends Component {
-  // Appear left aside with Assistant wrap
-	 showAssistant = () =>  {
+// Appear left aside with Assistant wrap
+export	const  showAssistant = () =>  {
 		var assi_btn = document.getElementById("assistant-btn");
 		var editor_wrap = document.getElementById("editor-wrap");
 		var close_assi = document.getElementById("close-assistant-btn");
@@ -35,19 +32,19 @@ class Header extends Component {
 		//Add Class
 		editor_wrap.classList.add('open_assis');
 		
-		this.stopDropDownList();
-		this.pu_style();
+		stopDropDownList();
+		pu_style();
 	}
 	
   //Stop Suggitions words
-	 stopDropDownList = () => { 
+export	const 	 stopDropDownList = () => { 
 		var ele = document.getElementsByClassName("sugg_dropdown");
 		 let i ; 
 		for(i = 0; i < ele.length; i++) {
 		ele[i].style.visibility = "hidden";
 		}
 	}
-	 pu_style = () =>  {
+	export const  pu_style = () =>  {
 		var els_pu = document.getElementsByClassName('dh_pu_error');
 		let i ;
 		for(i = 0; i < els_pu.length; i++) {
@@ -55,7 +52,7 @@ class Header extends Component {
 		}
 	}
   // Close left aside with Assistant wrap
-	 closeAssistant = () =>  {
+    export	const 	 closeAssistant = () =>  {
 		var assi_btn = document.getElementById("assistant-btn");
 		var editor_wrap = document.getElementById("editor-wrap");
 		var close_assi = document.getElementById("close-assistant-btn");
@@ -80,23 +77,26 @@ class Header extends Component {
 		//Remove Class
 		editor_wrap.classList.remove('open_assis');
 		
-		this.startDropDownList();
-		this.pu_unstyle()
+		startDropDownList();
+		pu_unstyle()
 	}
   
 //Show Suggitions words
- startDropDownList = () =>  {
+export	const  startDropDownList = () =>  {
 	var ele = document.getElementsByClassName("sugg_dropdown");
 	for( let i = 0; i < ele.length; i++) {
 	ele[i].style.visibility = "visible";
 	}
 }
-pu_unstyle = () =>  {
+export	const  pu_unstyle = () =>  {
 	var els_pu = document.getElementsByClassName('dh_pu_error');
 	for(  let i = 0; i < els_pu.length; i++) {
 	els_pu[i].style.borderBottom = "none";
 	}
 }
+
+class Header extends Component {
+  
 
 
 render(){
@@ -109,7 +109,7 @@ render(){
 				<a
 					href="#"
 					id="assistant-btn"
-					onClick={this.showAssistant}
+					onClick={showAssistant}
 					className="btn btn_sm animated_button victoria_four"
 				>
 					<span id="assi-condition">
@@ -134,9 +134,9 @@ render(){
 			<div className="close_assistant_wrap">
 				<span
 					id="close-assistant-btn"
-					onClick={this.closeAssistant}
+					onClick={closeAssistant}
 					className="close_assistant_btn"
-					/>
+				/>
 			</div>
 		</header>
 		

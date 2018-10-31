@@ -11,7 +11,7 @@ import PlagirsmTap from './Plagiarism/PlagiarismTap';
 class SideBarLeft extends Component {
 render(){
     return(
-      <aside id="sidebar-left-links" className="sidebar_l_links" aria-label>
+      <aside id="sidebar-left-links" className="sidebar_l_links" aria-label="ture">
       <div id="sugg-wrap" className="sugg_wrap">
         <nav className="sidebar_sugg">
           <ul id="true" className="nav_sugg_top">

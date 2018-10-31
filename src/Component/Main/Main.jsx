@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-
 import Footer from "../Footer/Footer";
 import {
   Editor,
   CompositeDecorator,
-  ContentState
+  EditorState 
 } from "draft-js";
 
 import HighlightedWrongWords from "./HighlightedWrongWords";
@@ -13,6 +12,7 @@ import SimpleScrollbar from "simple-scrollbar";
 import * as actionCreators from "../../store/actions/index";
 import * as actionTypes from '../../store/actions/actionTypes';
 var h2p = require("html2plaintext");
+
 
 class Main extends Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class Main extends Component {
         strategy: this.highlightWorngWords,
         component: HighlightedWrongWords
       }
-    ]);
+    ]);  
     this.state = {
-      
+      editorState: EditorState.createEmpty(compositeDecorator),
       subjectTitle: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -33,9 +33,12 @@ class Main extends Component {
   }
 
   handleChange = (editorState) => {  
-    this.props.onSaveEditorState(editorState);  
-    var text = h2p(this.props.editorState.getCurrentContent().getPlainText());
-    console.log("abeer", text);
+    this.setState({
+      editorState
+    });
+      
+    var text = h2p(this.state.editorState.getCurrentContent().getPlainText());
+    console.log("", text);
 
     this.props.onChangeText(text);
     this.props.onSpellCheck(text);
@@ -55,7 +58,7 @@ class Main extends Component {
       }, 500);
     }
   };
-  //Snakbar
+  //Snakbar not wotking now we will make it after replacing texts 
   snackBar = sWord => {
     var cWord = sWord.parentNode.parentNode.parentNode;
     cWord.classList.remove("dh_sp_error");
@@ -69,35 +72,35 @@ class Main extends Component {
     }, 3000);
   };
 
-  //  stratgy function for Highlightwords decortor
-  highlightWorngWords = (contentBlock, callback, editorState) => {
+  highlightWorngWords = (contentBlock, callback ) => {
     var text = contentBlock.getText();
-    let worngWords = this.props.errorWordslist ? this.props.errorWordslist : [];
+    let worngWords =   this.props.errorWordslist ? this.props.errorWordslist  : [];
     worngWords.forEach(word => {
       let indexes = this.getIndicesOf(word, text);
       indexes.forEach(wordIndex => {
         callback(wordIndex, wordIndex + word.length);
       });
     });
-  };
+  };  
   // function to get the index of each element in given array
-  getIndicesOf = (searchStr, str) => {
-    var searchStrLen = searchStr.length;
-    if (searchStrLen === 0) {
-      return [];
-    }
-    var startIndex = 0,
-      index,
-      indices = [];
+ getIndicesOf = (searchStr, str) => {
+  var searchStrLen = searchStr.length;
+  if (searchStrLen === 0) {
+    return [];
+  }
+  var startIndex = 0,
+    index,
+    indices = [];
 
-    while ((index = str.indexOf(searchStr, startIndex)) > -1) {
-      indices.push(index);
-      startIndex = index + searchStrLen;
-    }
-    return indices;
-  };
+  while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+    indices.push(index);
+    startIndex = index + searchStrLen;
+  }
+  return indices;
+};
+
   render() {
-    console.log(" ContentState  ", ContentState);
+   
     return (
       <Fragment>
         <main id="main-container" className="main_container">
@@ -119,7 +122,7 @@ class Main extends Component {
             />
             <div id="dhad-editor" className="dhad_editor">
               <Editor
-                editorState={this.props.editorState}
+                editorState={this.state.editorState}
                 onChange={this.handleChange}
                 textDirectionality="RTL"
                 placeholder="type here "
@@ -138,6 +141,7 @@ class Main extends Component {
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return {

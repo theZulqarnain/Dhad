@@ -67,9 +67,8 @@ export const ErorrWordsList = (text)  => {
             }
             console.log("corrct WOrd" , correctWords )
             dispatch(FetchCorrectionList(correctionList));
-            dispatch(FetchErrorListSuccess(ErrorWordsList));
-            
-            
+            dispatch(FetchErrorListSuccess(ErrorWordsList));  
+    
         })
         .catch(function (response) {
             //handle error
