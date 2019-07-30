@@ -15,40 +15,46 @@ const Main = (props) =>{
         let sentences = text.split('.');
         let lastChar = text.charCodeAt(text.length -1);
         let lastSentence = {};
-        
-        if(lastChar === 46 && (sentences.length) -2 === index){
+        if((lastChar === 46  )&& (sentences.length) -2 === index){
             //this condition enter new value in segment obj if . enter
             lastSentence[index] = sentences[(sentences.length)-2];
             Object.assign(segment,lastSentence)
+            callAPI(lastSentence[index])
             index++;
         }else if((sentences.length)-1 === index){
+            //adding text to existing sentence
             let latestSentence = Object.keys(segment).length-1;
             if(segment[latestSentence] !== sentences[sentences.length-1]){
                 //this condition will enter text to last element of segment
                 lastSentence[index] = sentences[sentences.length-1];
-                Object.assign(segment,lastSentence)
-            }else{
-                //this condition handle if someone change previous sentencess
-                let segmentVals = []
-                for(let key in segment){
-                    segmentVals.push(segment[key])
+                Object.assign(segment,lastSentence);
+                let hitSpace = text.charCodeAt(text.length -1);
+                if(hitSpace === 160){
+                    callAPI(lastSentence[index])
                 }
-                for(let i=0;i < segmentVals.length;i++){
-                    if(segmentVals[i] !== sentences[i]){
-                        segmentVals[i] = sentences[i];
+            }else{
+                //this condition handle if someone change previous sentences
+                for(let i=0;i < sentences.length;i++){
+                    if(segment[i] !== sentences[i]){
                         segment[i] =sentences[i];
+                        callAPI(lastSentence[index])
                     }
                 }
             }
             
         }
         else{
-            //this condition handles if someone removing text from sentencess
+            //this condition handles if someone removing text from sentences
             lastSentence[sentences.length-1] = sentences[sentences.length-1];
             Object.assign(segment,lastSentence);
             delete segment[index]; 
             index--;
         }
+        console.log(segment)
+    }
+
+    const callAPI = (text) =>{
+        console.log("API get called!",text)
     }
     
     return (
