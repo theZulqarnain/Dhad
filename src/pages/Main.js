@@ -105,19 +105,33 @@ import ContentEditable from 'react-contenteditable';
 class Main extends React.Component {
     constructor() {
       super();
-      this.state = { html: "<div>Enter something here!</div>" };
+      this.state = { html: `<div>Enter something here!</div>` };
+      this.contentEditable = React.createRef();
     }
   
     handleChange = evt => {
-      console.log(evt.target.value,evt.target.value.charCodeAt(evt.target.value.length -7));
+      // console.log(evt.target.value,evt.target.value.charCodeAt(evt.target.value.length -7));
+      let text = evt.target.value;
+      // let sentences = text.split('</div>');
+      
+      // console.log(text.getElementsByTagName("div").length)
+      let childrenDiv = this.contentEditable.current.children;
+      let index = childrenDiv.length-1;
+      let latestPara = childrenDiv[index].onclick = () => {this.getPara(index)};
+      // latestPara.id = index
+      // latestPara
+      console.log(latestPara)
       this.setState({ html: evt.target.value });
     };
-  
+    getPara = (para) =>{
+      console.log(para)
+    }
     render = () => {
       return (
         <div className="Editor">
             <h2>Dhad Editor</h2>
             <ContentEditable
+            innerRef={this.contentEditable}
                 html={this.state.html} // innerHTML of the editable div
                 disabled={false} // use true to disable edition
                 onChange={this.handleChange} // handle innerHTML change
