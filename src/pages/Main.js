@@ -38,7 +38,7 @@ const Main = (props) =>{
 
       if(curIndex !== index){
         if(childrenDiv.length < paraLength.length){
-            console.log('delete last index')
+            // console.log('delete last index')
             for(let i=0;i < childrenDiv.length;i++){
               if((childrenDiv[i].innerText).length !== paraLength[i]){
                  paraLength.splice(i,1)
@@ -54,21 +54,22 @@ const Main = (props) =>{
         if(latestPara.length !== (lastPara && lastPara.length)){
           setLastPara(latestPara);
           let newParaLength = paraLength;
-          newParaLength[curIndex] = latestPara.length-1;
+          newParaLength[curIndex] = latestPara.length;
           setParaLength(newParaLength);
-          console.log('current',latestPara.length-1)
+          // console.log('current',latestPara.length)
           contentEditable.current.onkeydown = (e)=>callAPI(e)
         }else{
           
           for(let i=0;i < childrenDiv.length;i++){
-            if((childrenDiv[i].innerText).length !== (paraLength[i])+1){
-              console.log(typeof((childrenDiv[i].innerText).length) , typeof(paraLength[i]),((childrenDiv[i].innerText).length) , (paraLength[i]),'in loop',childrenDiv[i])
+            let test = ((paraLength[i]));
+            if(((childrenDiv[i].innerText).length) !== test){
+              // console.log(typeof((childrenDiv[i].innerText).length) , typeof(paraLength[i]),((childrenDiv[i].innerText).length) , (paraLength[i]),'in loop',childrenDiv[i])
 
                 let newParaLength = paraLength;
                 newParaLength[i] = (childrenDiv[i].innerText).length;
                 setParaLength(newParaLength);
                 // console.log((childrenDiv[i].innerText).length,'innerloop',paraLength[i]);
-                // contentEditable.current.onkeydown = (e)=>callAPI(e)
+                contentEditable.current.onkeydown = (e)=>callAPI(e,childrenDiv[i].innerText)
                 // if(childrenDiv.length < paraLength.length){
                 //   console.log('delete last ')
                 // }
@@ -82,12 +83,17 @@ const Main = (props) =>{
 
       }
       setHtml(text)
-      console.log(paraLength)
+      // console.log(paraLength)
   }
-  const callAPI = (e) =>{
+  const callAPI = (e,text) =>{
     // console.log(e.which)
     if(e.which === 13 || e.which === 190 || e.which === 32){
-     console.log('api get called')
+    //  console.log('api get called')
+      if(text){
+        console.log('api get called',text)
+      }else{
+        console.log('api get called',lastPara)
+      }
     }
   }
   return(
