@@ -1,0 +1,121 @@
+/* Dhad Dark Theme */
+
+/* Body */
+.dhad_dark_wrap {
+	background: #333333;
+}
+
+/* Tooltip */
+.dhad_dark_wrap *[data-tooltip]:after {
+        background: #FFFFFF;
+        color: #333333;
+    }
+.dhad_dark_wrap *[data-tooltip-left]:before {
+        border-color: transparent transparent transparent #FFFFFF;
+    }
+.dhad_dark_wrap *[data-tooltip-right]:before {
+        border-color: transparent #FFFFFF transparent transparent;
+    }
+.dhad_dark_wrap *[data-tooltip-top]:before {
+        border-color: #FFFFFF transparent transparent transparent;
+    }
+.dhad_dark_wrap *[data-tooltip-bottom]:before {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+
+/********/
+.sidebar_l_links *[data-tooltip]:after {
+        background: #666666;
+        color: #FFFFFF;
+    }
+.sidebar_l_links *[data-tooltip-left]:before {
+        border-color: transparent transparent transparent #666666;
+    }
+.sidebar_l_links *[data-tooltip-right]:before {
+        border-color: transparent #666666 transparent transparent;
+    }
+.sidebar_l_links *[data-tooltip-top]:before {
+        border-color: #666666 transparent transparent transparent;
+    }
+.sidebar_l_links *[data-tooltip-bottom]:before {
+        border-color: transparent transparent #666666 transparent;
+    }
+
+/********/
+.assistan_btn_wrap *[data-tooltip]:after {
+        background: #666666;
+        color: #FFFFFF;
+    }
+.assistan_btn_wrap *[data-tooltip-left]:before {
+        border-color: transparent transparent transparent #666666;
+    }
+.assistan_btn_wrap *[data-tooltip-right]:before {
+        border-color: transparent #666666 transparent transparent;
+    }
+.assistan_btn_wrap *[data-tooltip-top]:before {
+        border-color: #666666 transparent transparent transparent;
+    }
+.assistan_btn_wrap *[data-tooltip-bottom]:before {
+        border-color: transparent transparent #666666 transparent;
+    }
+
+/* Dhad Editor */
+.dhad_dark_wrap .editor_wrap {
+	color: #FFFFFF;
+}
+.dhad_dark_wrap .editor_wrap .dhad_subject {
+	color: #FFFFFF;
+	background: #333333;
+}
+.dhad_dark_wrap [contenteditable=true]:empty:before{
+	color: #F7F5F5;
+}
+.dhad_dark_wrap input::placeholder {
+  color: #F7F5F5;
+}
+.dhad_dark_wrap .dhad_editor::-webkit-scrollbar-thumb {
+  background-color: #F0F0F0;
+  outline: 1px solid #F0F0F0;
+}
+
+/* Left Menu Bottom Links */
+.dhad_dark_wrap .sidebar_l_links ul.nav_l_bottom li a{
+	color: #F0F0F0;
+}
+.dhad_dark_wrap .sidebar_l_links ul.nav_l_bottom li a:hover{
+	color: #6F6D6D;
+}
+.dhad_dark_wrap .sidebar_l_links ul.nav_l_bottom li a.active{
+	color: #6F6D6D;
+}
+
+/* Defualt Error */
+.dhad_dark_wrap .dh_sp_error label {
+	border-bottom: rgba(250,50,50,0.8) 3px solid;
+}
+.dhad_dark_wrap .dh_sp_error:hover label, .dh_sp_error.active label {
+	background: rgba(250,50,50,0.5);
+	border-bottom-color: rgba(250,50,50,1.00);
+}
+
+/* Common error */
+.dhad_dark_wrap .common_error label {
+	border-bottom: rgba(252,0,252,0.8) 3px solid;
+}
+.dhad_dark_wrap .common_error:hover label, .common_error.active label {
+	background: rgba(252,0,252,0.5);
+	border-bottom-color: rgba(252,0,252,0.8);
+}
+
+/* Main Menu Icons */
+.dhad_dark_wrap .menu_show {
+	background-image: url(../images/menu-light.png);
+}
+.dhad_dark_wrap .menu_hide {
+	background-image: url(../images/menu-hide-light.png);
+}
+
+/* Save btn */
+.dhad_dark_wrap #saved-btn a {
+	color: #DBD8D8;
+}
