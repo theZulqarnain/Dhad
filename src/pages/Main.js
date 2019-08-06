@@ -2,7 +2,8 @@ import React,{Component,useState,useRef} from 'react'
 import {connect} from 'react-redux';
 import {dataListHandler} from '../action';
 import ContentEditable from 'react-contenteditable';
-
+import Header from './header';
+import '../index.css';
 
 
 
@@ -91,19 +92,20 @@ const Main = (props) =>{
     }
   }
   return(
-    <div className="Editor">
-            <h2>Dhad Editor</h2>
-            <ContentEditable
-                datatext="Enter text here"
-                innerRef={contentEditable}
-                html={html} // innerHTML of the editable div
-                disabled={false} // use true to disable edition
-                onChange={handleChange} // handle innerHTML change
-                className="dhad_editor"
-                // onKeyDown={this.handleEnter}
-            />
-            <button onClick={()=>dataListPass()}>submit</button>
-        </div>
+    <main className="main_container" id="main_container">
+    <section id="editor-wrap" className="editor_wrap">
+      <Header />
+    <input type="text" id="dhad-subject" className="dhad_subject" tabIndex={-1} placeholder="عُنوان الموضوع يكتب هنا" />
+      <ContentEditable
+        datatext="Enter text here"
+        innerRef={contentEditable}
+        html={html} // innerHTML of the editable div
+        disabled={false} // use true to disable edition
+        onChange={handleChange} // handle innerHTML change
+        className="dhad_editor"
+      />
+    </section>
+  </main>
   )
 }
 const mapStateToProps = (state) =>{
