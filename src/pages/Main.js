@@ -11,8 +11,9 @@ const Main = (props) =>{
   const [index, setIndex] = useState(0);
   const [lastPara, setLastPara] = useState(undefined);
   const [paraLength, setParaLength] = useState([])
+  const [wrongWords, setWrongWords] = useState({})
   const contentEditable = useRef(null);
-
+  let cursor
 
   const handleChange = (e) =>{
     let text = e.target.value;
@@ -85,16 +86,48 @@ const Main = (props) =>{
       setHtml(text)
       // console.log(paraLength)
   }
-  const callAPI = (e,text) =>{
+  const callAPI = (e,text,) =>{
     // console.log(e.which)
     if(e.which === 13 || e.which === 190 || e.which === 32){
     //  console.log('api get called')
       if(text){
-        console.log('api get called',text)
+        let apiRes = {
+          'wrong1':"wrong",
+          'test1':"test",
+          'highlight1':'highlight'
+        }
+        setWrongWords(apiRes)
+        highlightWordsHandler(apiRes)
       }else{
-        console.log('api get called',lastPara)
+        let apiRes = {
+          'wrong1':"wrong",
+          'test1':"test",
+          'highlight1':'highlight'
+        }
+        setWrongWords(apiRes)
+        highlightWordsHandler(apiRes)
+        // contentEditable.current.innerHTML="<div>need to handle place holder</div>"
       }
     }
+  }
+  const highlightWordsHandler = (apiRes) =>{
+    let childrenDiv = contentEditable.current.children[0].innerHTML;
+    let keys = Object.keys(apiRes)
+    console.log(contentEditable)
+
+    keys.map(val =>{
+
+      if(childrenDiv.match(val)){
+        let rplc = `<span class='error'>${apiRes[val]}</span>`
+        let test = childrenDiv.replace(val, apiRes[val]);
+        contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(val, rplc);
+        console.log(contentEditable.current.children,'wrongwrods',rplc)
+
+      }
+
+    })
+
+
   }
   return(
     <div className="Editor">
