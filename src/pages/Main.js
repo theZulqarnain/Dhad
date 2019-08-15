@@ -2,6 +2,8 @@ import React,{Component,useState,useRef} from 'react'
 import {connect} from 'react-redux';
 import {dataListHandler} from '../action';
 import ContentEditable from 'react-contenteditable';
+import InputDiv from './Input';
+import CaretPositioning from '../components/EditCaretPositioning'
 
 
 
@@ -11,12 +13,15 @@ const Main = (props) =>{
   const [index, setIndex] = useState(0);
   const [lastPara, setLastPara] = useState(undefined);
   const [paraLength, setParaLength] = useState([])
-  const [wrongWords, setWrongWords] = useState({})
+  const [wrongWords, setWrongWords] = useState({});
+  const [caretPosition, setCaretPosition] = useState(0)
   const contentEditable = useRef(null);
-  let cursor
+  let cursor = false;
 
   const handleChange = (e) =>{
+    // console.log(e.currentTarget)
     let text = e.target.value;
+    let savedCaretPosition = CaretPositioning.saveSelection(contentEditable.current);
       let childrenDiv = contentEditable.current.children;
 
       let curIndex = childrenDiv.length-1;
@@ -83,8 +88,9 @@ const Main = (props) =>{
         }
 
       }
+      setCaretPosition(savedCaretPosition)
       setHtml(text)
-      // console.log(paraLength)
+      console.log(text)
   }
   const callAPI = (e,text,) =>{
     // console.log(e.which)
@@ -113,15 +119,21 @@ const Main = (props) =>{
   const highlightWordsHandler = (apiRes) =>{
     let childrenDiv = contentEditable.current.children[0].innerHTML;
     let keys = Object.keys(apiRes)
-    console.log(contentEditable)
+    
+    // console.log(contentEditable)
 
     keys.map(val =>{
 
-      if(childrenDiv.match(val)){
-        let rplc = `<span class='error'>${apiRes[val]}</span>`
+      if((childrenDiv.match(val)) && cursor === false){
+        cursor = true;
+        let rplc = `<span class='error'>${val}</span>&nbsp;`
         let test = childrenDiv.replace(val, apiRes[val]);
-        contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(val, rplc);
-        console.log(contentEditable.current.children,'wrongwrods',rplc)
+        let position = {start:caretPosition.start,end:caretPosition.end}
+        contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(/wrong1/i, rplc);
+        // setHtml((contentEditable.current.children[0].innerHTML).replace(val, rplc))
+        CaretPositioning.restoreSelection(contentEditable.current, position);
+        console.log(contentEditable.current.children,'wrongwrods',rplc,caretPosition)
+
 
       }
 
@@ -129,9 +141,11 @@ const Main = (props) =>{
 
 
   }
+  console.log(caretPosition)
   return(
     <div className="Editor">
             <h2>Dhad Editor</h2>
+            {/* <InputDiv/> */}
             <ContentEditable
                 datatext="Enter text here"
                 innerRef={contentEditable}
