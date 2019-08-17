@@ -4,6 +4,7 @@
 :-ms-input-placeholder { color:#3283bf; } /* ie */
 input:-moz-placeholder { color:#3283bf; }
 
+
 ::selection
 {
 background: rgba(85,188,245,0.3);
@@ -1119,6 +1120,8 @@ input[type="checkbox"].switch_1{
     white-space: nowrap;
 	direction: rtl;
 }
+
+
 #notification-error {
 	background-color: #EB696B;
 }
@@ -2426,4 +2429,8 @@ stroke-dashoffset:0
   .modal_scroll .ss-wrapper {
 	padding-left: 0px;
 	}
+}
+
+.dhad_dark_wrap {
+	background: #333333; 
 }
