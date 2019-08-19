@@ -1,7 +1,6 @@
 import React ,  { Fragment } from 'react';
 import {BrowserRouter as Router, Route,} from 'react-router-dom';
 
-// import Header from '../components/Header';
 import Main from '../pages/Main'
 import {
     connect
@@ -12,7 +11,7 @@ const AppRouter = (props) => {
     
     return(
             <Fragment>
-                {/* <Header /> */}
+               
                 <Route path='/' component={Main} />
             </Fragment>
         

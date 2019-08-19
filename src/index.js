@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "normalize.css/normalize.css"
 import  "../src/styles/index.scss";
+import '../node_modules/line-awesome/css/line-awesome.css'; 
+import "./darktheme.css";
 import AppRouter from './routers/AppRouter';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,7 +13,6 @@ import reducers from './reducers';
 const middleware = [
     reduxThunk,
 ];
-
 
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(...middleware),

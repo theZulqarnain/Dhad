@@ -1,24 +1,29 @@
 import React, { useState  , Fragment } from 'react';
 import '../../index.css';
 import Tabs from './tabs/index.js';
-
+import { connect } from 'react-redux';
+import { FaQuoteRight } from "react-icons/fa";
+import Plagiarism from './plagiarism';
+import ArabicTeachers from './ArabicTeachers/ArabicTeachers';
 const LeftSiderbar  = (props) =>{
 
   const [tab, setTab] = useState();
 
     	// Tabs in left aside
 	const  openTab  =  (tabName)  =>  {
-        
-       setTab(tabName);
-      
+         setTab(tabName);
+  }
 
+  const suggWrapStyle = {
+    width: `50%` ,
+    overflow: 'visible' 
   }
     
 
     return(
         <Fragment>
         <aside id="sidebar-left-links" className="sidebar_l_links" aria-label="">
-        <div id="sugg-wrap" className="sugg_wrap">
+        <div id="sugg-wrap" className="sugg_wrap" style={props.OpenSideBar ? suggWrapStyle : null } >
           <nav className="sidebar_sugg">
             <ul  className="nav_sugg_top">
               <li>
@@ -55,6 +60,8 @@ const LeftSiderbar  = (props) =>{
         </div>
         <ul id="sidebar-left-bottom" className="nav_l_bottom">
             {/* here we need to handle show a box for the btoom items */}
+           <Plagiarism />
+           <ArabicTeachers />
         </ul>
       </aside>
       </Fragment>
@@ -62,7 +69,14 @@ const LeftSiderbar  = (props) =>{
     );
  }
 
-export default LeftSiderbar ; 
+ const mapStateToProps = (state) => {
+  return {
+    OpenSideBar: state.MainReducer.openSideBar  
+  }
+ }
+
+export default connect( mapStateToProps )(LeftSiderbar);
+
 
 
 

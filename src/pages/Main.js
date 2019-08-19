@@ -1,10 +1,11 @@
-import React, { Component, useState, useRef } from 'react'
+import React, { Fragment  , useState, useRef } from 'react'
 import { connect } from 'react-redux';
-import { dataListHandler } from '../action';
+import { dataListHandler   }  from '../action';
 import ContentEditable from 'react-contenteditable';
 import Header from './header/header';
 import '../index.css';
 import LeftSiderbar from './sidebar/leftSidebar';
+
 
 
 
@@ -15,11 +16,10 @@ const Main = (props) => {
   const [paraLength, setParaLength] = useState([])
   const contentEditable = useRef(null);
   // states for styling 
-  const [editorWrapWidth, setEditorWrapWidth] = useState(`80%`);
-  const [editorWrapMarginRight, setEditorWrapMarginRight] = useState(`5%`);
 
 
   const handleChange = (e) => {
+    console.log(props.OpenSideBar);
     let text = e.target.value;
     let childrenDiv = contentEditable.current.children;
     let curIndex = childrenDiv.length - 1;
@@ -87,7 +87,7 @@ const Main = (props) => {
     }
     setHtml(text)
     console.log(paraLength)
-    console.log(editorWrapWidth);
+    console.log(props.onDarkTheme);
   }
   const callAPI = (e) => {
     // console.log(e.which)
@@ -97,20 +97,29 @@ const Main = (props) => {
 
   }
 
-  // open left menue 
-  const openAssistanceHandler = () => {
-    
-    // setEditorWrapWidth(`40%`);
-    // setEditorWrapMarginRight(`0%`);
-    // console.log("{ssd");
-  }
+  
+
+    const editorWrapStyle = {
+      width: `40%` , 
+      marginRight: `0%`
+    }
+    const inputDarkthemeStyel = {
+      color: `#FFFFFF` , 
+      background: `#333333`
+    }
+ 
 
   return (
-    <main className="main_container" id="main_container">
-      <section style={ {width: editorWrapWidth  , marginRight: editorWrapMarginRight }} id="editor-wrap" className="editor_wrap">
-        <Header  onOpenAssistance={openAssistanceHandler} />
+    <Fragment>    
+      <Header />
         <LeftSiderbar />
-        <input type="text" id="dhad-subject" className="dhad_subject" tabIndex={-1} placeholder="عُنوان الموضوع يكتب هنا" />
+      <main className="main_container" id="main_container">
+      <section style={props.OpenSideBar ? editorWrapStyle : null } id="editor-wrap" className="editor_wrap">
+        <input type="text" 
+               id="dhad-subject" 
+               className="dhad_subject" 
+               style={props.onDarkTheme ? inputDarkthemeStyel : null }
+               tabIndex={-1} placeholder="عُنوان الموضوع يكتب هنا" />
         <ContentEditable
           datatext="Enter text here"
           innerRef={contentEditable}
@@ -121,11 +130,14 @@ const Main = (props) => {
         />
       </section>
     </main>
+    </Fragment>
   )
 }
 const mapStateToProps = (state) => {
   return {
-    DataList: state.MainReducer.data_list
+    DataList: state.MainReducer.data_list ,
+    OpenSideBar: state.MainReducer.openSideBar,
+    onDarkTheme: state.MainReducer.darkTheme
   }
 }
-export default connect(mapStateToProps, { dataListHandler })(Main);
+export default connect(mapStateToProps, { dataListHandler  })(Main);

@@ -646,7 +646,7 @@ input[type="checkbox"].switch_1{
 	background-image: url(./assets/images/Editor-dhad-dark.png);
 }
 .dhad_light_theme {
-	display: none;
+	
 	background-image: url(./assets/images/Editor-dhad-light.png);
 }
 
