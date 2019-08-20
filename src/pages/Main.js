@@ -9,19 +9,32 @@ import CaretPositioning from '../components/EditCaretPositioning'
 
 
 const Main = (props) =>{
-  const [html, setHtml] = useState("<div>Enter something here!</div>");
+  const [html, setHtml] = useState('');
   const [index, setIndex] = useState(0);
   const [lastPara, setLastPara] = useState(undefined);
   const [paraLength, setParaLength] = useState([])
   const [wrongWords, setWrongWords] = useState({});
   const [caretPosition, setCaretPosition] = useState(0)
   const contentEditable = useRef(null);
-  let cursor = false;
+  const [cursor, setCursor] = useState(false);
+  const [aIndex, setAIndex] = useState(0)
+  // let cursor = false;
 
   const handleChange = (e) =>{
-    // console.log(e.currentTarget)
-    let text = e.target.value;
-    let savedCaretPosition = CaretPositioning.saveSelection(contentEditable.current);
+    if(contentEditable.current.childNodes[0]['nodeName'] === '#text') {
+      var textNode = contentEditable.current.childNodes[0];
+      var div = document.createElement('div');
+      // if(textNode.innerHTML !== undefined){
+      //   div.innerHTML = textNode.innerHTML;
+      // }
+      div.innerHTML = e.target.value;
+      textNode.parentNode.replaceChild(div,textNode)
+      let savedCaretPosition = CaretPositioning.saveSelection(contentEditable.current);
+      let position = {start:savedCaretPosition.start+1,end:savedCaretPosition.end+1}
+      CaretPositioning.restoreSelection(contentEditable.current, position);
+    }else{
+      let text = e.target.value;
+      let savedCaretPosition = CaretPositioning.saveSelection(contentEditable.current);
       let childrenDiv = contentEditable.current.children;
 
       let curIndex = childrenDiv.length-1;
@@ -29,7 +42,8 @@ const Main = (props) =>{
       if(childrenDiv[curIndex] && childrenDiv[curIndex].innerText){
          latestPara = childrenDiv[curIndex].innerText;
       }else{
-        contentEditable.current.innerHTML="<div>need to handle place holder</div>"
+        // contentEditable.current.innerHTML="<div>need to handle place holder</div>"
+
         // contentEditable.appendChild("<div></div>")
         // contentEditable.createElement("div")
       }
@@ -62,7 +76,6 @@ const Main = (props) =>{
           let newParaLength = paraLength;
           newParaLength[curIndex] = latestPara.length;
           setParaLength(newParaLength);
-          // console.log('current',latestPara.length)
           contentEditable.current.onkeydown = (e)=>callAPI(e)
         }else{
           
@@ -91,8 +104,10 @@ const Main = (props) =>{
       setCaretPosition(savedCaretPosition)
       setHtml(text)
       console.log(text)
+    }
+    
   }
-  const callAPI = (e,text,) =>{
+  const callAPI = async (e,text,) =>{
     // console.log(e.which)
     if(e.which === 13 || e.which === 190 || e.which === 32){
     //  console.log('api get called')
@@ -100,48 +115,160 @@ const Main = (props) =>{
         let apiRes = {
           'wrong1':"wrong",
           'test1':"test",
-          'highlight1':'highlight'
+          'highlight1':'highlight',
+          'wrong1':"wrong",
         }
-        setWrongWords(apiRes)
-        highlightWordsHandler(apiRes)
+        let highlightWords = {}
+        for (let key in apiRes) {
+          // console.log('enter')
+          if (apiRes.hasOwnProperty(key)) {
+            let element = apiRes[key];
+            // console.log(element,key);
+            
+          }
+        }
+        // setWrongWords(highlightWords)
+        // highlightWordsHandler(apiRes)
       }else{
+        var arr = ['wrong1', 'test1', 'highlight1', 'wrong1'];
+        var counts = {};
+
+        for (var i = 0; i < arr.length; i++) {
+          var num = arr[i];
+          counts[num] = counts[num] ? counts[num] + 1 : 1;
+        }
+        // console.log(counts);
         let apiRes = {
           'wrong1':"wrong",
           'test1':"test",
           'highlight1':'highlight'
         }
-        setWrongWords(apiRes)
-        highlightWordsHandler(apiRes)
+        let highlightWords = wrongWords;
+        for (let key in apiRes) {
+          // console.log('enter')
+          if (!(wrongWords.hasOwnProperty(key))) {
+            let element = apiRes[key];
+            highlightWords[key] = {suggestions:[element],highlighted:false,count:counts[key]}
+            // console.log(apiRes[key],'new val')
+          }
+        }
+
+        // const keys = Object.keys(apiRes);
+        // keys.forEach(key => {
+        //   // console.log(apiRes[key])
+        //   if (!(wrongWords.hasOwnProperty(key))) {
+        //     let element = apiRes[key];
+        //     highlightWords[key] = {suggestions:[element],highlighted:false}
+        //     // console.log(apiRes[key],'new val')
+        //   }
+        // })  
+        // 
+        // console.log(highlightWords);
+
+        // setWrongWords(highlightWords)
+        highlightWordsHandler(highlightWords)
         // contentEditable.current.innerHTML="<div>need to handle place holder</div>"
       }
     }
   }
-  const highlightWordsHandler = (apiRes) =>{
+  const highlightWordsHandler = (highlightWords) =>{
+    console.log(contentEditable);
     let childrenDiv = contentEditable.current.children[0].innerHTML;
-    let keys = Object.keys(apiRes)
-    
-    // console.log(contentEditable)
+    let unHighlightWord = highlightWords
+    // console.log(childrenDiv)
+    // let keys = Object.keys(apiRes)
+    // for (let node in contentEditable.current.childNodes[0].childNodes) {
+    //   console.log(contentEditable.current.childNodes[0].childNodes,node)
+    // }
+    for (let key in highlightWords) {
+      // console.log('enter')
+      if (((highlightWords.hasOwnProperty(key)) && highlightWords[key]['highlighted'] === false) || (highlightWords[key]['count'] < wrongWords[key]['count'])) {
+        // console.log("enter",highlightWords[key]['count'], wrongWords[key]['count'],highlightWords[key])
+        if(contentEditable.current.childNodes[0].childNodes.length > 1){
+          // contentEditable.current.childNodes[0].childNodes.map(text =>{
+          //   console.log(text.innerHTML)
+  
+          // })
+          // for (let node in contentEditable.current.childNodes[0].childNodes) {
+          //   console.log(contentEditable.current.childNodes[0].nodeName)
+          // }
+        }
+        
+        // console.log(contentEditable.current.childNodes[0].childNodes.length)
+        if((childrenDiv.match(key)) ){
+          // console.log(key,'matched')
+            unHighlightWord[key]['highlighted'] = true;
+            unHighlightWord[key]['count'] = highlightWords[key]['count'];
 
-    keys.map(val =>{
+            let rplc = `<span class='error' id=${aIndex} >${key}</span>`
+            
+            
+            let position = {start:caretPosition.start+1,end:caretPosition.end+1}
 
-      if((childrenDiv.match(val)) && cursor === false){
-        cursor = true;
-        let rplc = `<span class='error'>${val}</span>&nbsp;`
-        let test = childrenDiv.replace(val, apiRes[val]);
-        let position = {start:caretPosition.start,end:caretPosition.end}
-        contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(/wrong1/i, rplc);
-        // setHtml((contentEditable.current.children[0].innerHTML).replace(val, rplc))
-        CaretPositioning.restoreSelection(contentEditable.current, position);
-        console.log(contentEditable.current.children,'wrongwrods',rplc,caretPosition)
+            contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(new RegExp(key), rplc);
+            // contentEditable.current.children[0].innerHTML.normalize();
 
-
+            let fetchEl = document.getElementById(aIndex);
+            fetchEl.addEventListener("click", test);
+            
+            // setHtml((contentEditable.current.children[0].innerHTML).replace(val, rplc))
+            // CaretPositioning.restoreSelection(contentEditable.current, position);
+            setCursorAfterElement(document.getElementById(aIndex));
+          }
+          // let element = apiRes[key];
+          // highlightWords[key] = {suggestions:[element],highlighted:false}
+          // // console.log(apiRes[key],'new val')
       }
+    }
+    setWrongWords(unHighlightWord)
 
-    })
+    // keys.map(val =>{
+
+    //   if((childrenDiv.match(val)) && cursor === false){
+    //     // setCursor(true);
+    //     // let rplc = `<span class='error' id="childSpan">${val}</span>`
+    //     // let test = childrenDiv.replace(val, apiRes[val]);
+    //     // let position = {start:caretPosition.start+1,end:caretPosition.end+1}
+    //     // contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(new RegExp(val), rplc);
+    //     // contentEditable.current.children[0].innerHTML.normalize();
+    //     // // setHtml((contentEditable.current.children[0].innerHTML).replace(val, rplc))
+    //     // // CaretPositioning.restoreSelection(contentEditable.current, position);
+    //     // setCursorAfterElement(document.getElementById('childSpan'));
+    //     // console.log(contentEditable.current.children,'wrongwrods',rplc,caretPosition)
+
+
+    //   }
+
+    // })
 
 
   }
-  console.log(caretPosition)
+  const test = (event)  =>{
+    console.log(event.target.id)
+  }
+  const  setCursorAfterElement =(ele) =>{
+    if (!ele.nextElementSibling) {
+      var dummyElement = document.createElement('a')
+      dummyElement.appendChild(document.createTextNode('\u00A0'))
+      ele.parentNode.appendChild(dummyElement)
+    //  console.log(ele.parentNode,'parent node')
+    }
+    var nextElement = ele.nextElementSibling
+    nextElement.tabIndex=aIndex;
+    // nextElement.id=1
+    nextElement.focus()
+    var r = document.createRange();
+    r.setStart(nextElement.childNodes[0], 1);
+    r.setEnd(nextElement.childNodes[0], 1);
+    // console.log("nextelement",nextElement.childNodes[0])
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    setAIndex(aIndex+1)
+
+    // document.execCommand("delete", false, null);
+  }
+  // console.log(caretPosition)
   return(
     <div className="Editor">
             <h2>Dhad Editor</h2>
@@ -153,6 +280,8 @@ const Main = (props) =>{
                 disabled={false} // use true to disable edition
                 onChange={handleChange} // handle innerHTML change
                 className="dhad_editor"
+                spellCheck="false"
+                placeholder={"Write something here!"}
                 // onKeyDown={this.handleEnter}
             />
             <button onClick={()=>dataListPass()}>submit</button>

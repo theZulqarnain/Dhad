@@ -15,4 +15,9 @@
         border-bottom: 3px solid;
         border-bottom-color: red;
     }
+    [contenteditable=true]:empty:before {
+        content: attr(placeholder);
+        display: block;
+        color: #aaa;
+      }
 }
