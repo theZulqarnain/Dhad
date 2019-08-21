@@ -172,7 +172,8 @@ const Main = (props) =>{
     }
   }
   const highlightWordsHandler = (highlightWords) =>{
-    console.log(contentEditable);
+    // console.log(document.getElementById('Main_editor').childNodes)
+    // console.log(contentEditable);
     let childrenDiv = contentEditable.current.children[0].innerHTML;
     let unHighlightWord = highlightWords
     // console.log(childrenDiv)
@@ -194,7 +195,7 @@ const Main = (props) =>{
           // }
         }
         
-        // console.log(contentEditable.current.childNodes[0].childNodes.length)
+        // console.log(contentEditable.current.children[0].parentNode)
         if((childrenDiv.match(key)) ){
           // console.log(key,'matched')
             unHighlightWord[key]['highlighted'] = true;
@@ -204,7 +205,7 @@ const Main = (props) =>{
             
             
             let position = {start:caretPosition.start+1,end:caretPosition.end+1}
-
+            // contentEditable.current.children[0].parentNode.replace(new RegExp(key), rplc)
             contentEditable.current.children[0].innerHTML = (contentEditable.current.children[0].innerHTML).replace(new RegExp(key), rplc);
             // contentEditable.current.children[0].innerHTML.normalize();
 
@@ -250,18 +251,26 @@ const Main = (props) =>{
     if (!ele.nextElementSibling) {
       var dummyElement = document.createElement('a')
       dummyElement.appendChild(document.createTextNode('\u00A0'))
+      // let parentDiv = document.getElementById('Main_editor')
+      // if(document.getElementById(0).length > 0){
+      //   console.log('first one')
+      // }else{
+      //   console.log('seconds one',!document.getElementById(0))
+      // }
       ele.parentNode.appendChild(dummyElement)
-    //  console.log(ele.parentNode,'parent node')
+      
+    //  console.log(ele.parentNode,'parent node',ele.parentNode)
     }
     var nextElement = ele.nextElementSibling
     nextElement.tabIndex=aIndex;
     // nextElement.id=1
     nextElement.focus()
     var r = document.createRange();
-    r.setStart(nextElement.childNodes[0], 1);
-    r.setEnd(nextElement.childNodes[0], 1);
-    // console.log("nextelement",nextElement.childNodes[0])
+    r.setStart(nextElement, 1);
+    r.setEnd(nextElement, 1);
     var s = window.getSelection();
+    // console.log(s,"nextelement",nextElement.childNodes[0])
+
     s.removeAllRanges();
     s.addRange(r);
     setAIndex(aIndex+1)
@@ -274,7 +283,6 @@ const Main = (props) =>{
             <h2>Dhad Editor</h2>
             {/* <InputDiv/> */}
             <ContentEditable
-                datatext="Enter text here"
                 innerRef={contentEditable}
                 html={html} // innerHTML of the editable div
                 disabled={false} // use true to disable edition
@@ -282,6 +290,7 @@ const Main = (props) =>{
                 className="dhad_editor"
                 spellCheck="false"
                 placeholder={"Write something here!"}
+                id="Main_editor"
                 // onKeyDown={this.handleEnter}
             />
             <button onClick={()=>dataListPass()}>submit</button>
