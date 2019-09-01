@@ -9,11 +9,12 @@ import {
 } from "draft-js";
 
 import HighlightedWrongWords from "./HighlightedWrongWords";
-import SimpleScrollbar from "simple-scrollbar";
+
 import * as actionCreators from "../../store/actions/index";
 import * as actionTypes from '../../store/actions/actionTypes';
 var h2p = require("html2plaintext");
 
+const Context = React.createContext();
 
 class Main extends Component {
   constructor(props) {
@@ -104,7 +105,8 @@ class Main extends Component {
   render() {
    
     return (
-      <Fragment>
+       //<Context.Provider value={this.state.editorState}>
+       <Fragment>
         <main id="main-container" className="main_container">
           <section
             data-simplebar="init"
@@ -138,7 +140,7 @@ class Main extends Component {
           <span> 4 ثانية وقت التدقيق </span>
           <span> 8 ثانية وقت التحدث </span>
         </Footer>
-      </Fragment>
+   </Fragment>  // </Context.Provider>
     );
   }
 }

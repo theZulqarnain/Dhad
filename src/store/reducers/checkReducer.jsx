@@ -3,8 +3,10 @@ import {updateObject} from '../../shared/utility';
 
 const initialState = {
     text: "",
-    errorWordslist: [] ,
-    correctionsList: {}
+    errorWordslist: ['worng1' , 'wrong1'] ,
+    correctionsList: {
+        'wrong1': ['wrong1' , 'test1']
+    }
 
 };
 
